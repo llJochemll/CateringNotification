@@ -87,7 +87,7 @@ namespace PXLCateringNotification
 
         [FunctionName("UnSubscribe")]
         public static async Task<IActionResult> UnSubscribe(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "unsubscribe")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "unsubscribe")] HttpRequest req,
             ILogger log)
         {
             return new OkResult();
@@ -95,7 +95,7 @@ namespace PXLCateringNotification
 
         [FunctionName("Verify")]
         public static async Task<IActionResult> Verify(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "verify")] HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "verify")] HttpRequest req,
             ILogger log)
         {
             UserSubscriptionVerification verification;
@@ -110,6 +110,12 @@ namespace PXLCateringNotification
             {
                 var subscriptionsTable = await Table.GetTableAsync("subscriptions");
                 var subscription = (await subscriptionsTable.ExecuteAsync(TableOperation.Retrieve<UserSubscription>("sub", verification.Email))).Result as UserSubscription;
+
+                if (verification.Token != subscription.Token)
+                {
+                    return new UnauthorizedResult();
+                }
+
                 subscription.Verified = true;
 
                 await subscriptionsTable.ExecuteAsync(TableOperation.InsertOrReplace(subscription));
