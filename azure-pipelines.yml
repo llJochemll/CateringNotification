@@ -28,4 +28,4 @@ steps:
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId).zip'
-name: 'drop'
+    name: 'drop'
