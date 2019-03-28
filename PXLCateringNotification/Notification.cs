@@ -4,26 +4,49 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 using System.Net.Http;
 using System.Linq;
-using System.Net.Mail;
-using System.Net;
 using System.Collections.Generic;
+using Microsoft.WindowsAzure.Storage.Table;
 
 namespace PXLCateringNotification
 {
     public static class Notification
     {
         [FunctionName("SendNotification")]
-        public static void SendNotification([TimerTrigger("0 45 11 * * 1-5")]TimerInfo myTimer, ILogger log)
+        public static async Task SendNotificationAsync([TimerTrigger("0 */1 10-15 * * 1-5")]TimerInfo myTimer, ILogger log)
         {
-            var emails = new string[] {
-                "jochem.dejaeghere@student.pxl.be",
-                "ward.poel@student.pxl.be",
-                "ian.angillis@student.pxl.be",
-                "joachim.veulemans@student.pxl.be",
-                "toon.lodts@student.pxl.be",
-                "toon.vanengeland@student.pxl.be"
-            };
-            emails.ToList().ForEach(async e => await SendMailAsync(e));
+            var subscriptionsTable = await Table.GetTableAsync("subscriptions");
+            var queryResult = await subscriptionsTable.ExecuteQuerySegmentedAsync(new TableQuery<Subscription.UserSubscription>(), new TableContinuationToken());
+
+            var subscriptions = queryResult.ToList();
+
+            await Mail.SendMailAsync(
+                subscriptions.Where(e =>
+                {
+                    if (!e.Verified)
+                    {
+                        return false;
+                    }
+
+                    switch (DateTime.Now.DayOfWeek)
+                    {
+                        case DayOfWeek.Monday:
+                            return e.NotificationTimes.Monday.Hour == DateTime.Now.Hour && e.NotificationTimes.Monday.Minute == DateTime.Now.Minute;
+                        case DayOfWeek.Tuesday:
+                            return e.NotificationTimes.Tuesday.Hour == DateTime.Now.Hour && e.NotificationTimes.Tuesday.Minute == DateTime.Now.Minute;
+                        case DayOfWeek.Wednesday:
+                            return e.NotificationTimes.Wednesday.Hour == DateTime.Now.Hour && e.NotificationTimes.Wednesday.Minute == DateTime.Now.Minute;
+                        case DayOfWeek.Thursday:
+                            return e.NotificationTimes.Thursday.Hour == DateTime.Now.Hour && e.NotificationTimes.Thursday.Minute == DateTime.Now.Minute;
+                        case DayOfWeek.Friday:
+                            return e.NotificationTimes.Friday.Hour == DateTime.Now.Hour && e.NotificationTimes.Friday.Minute == DateTime.Now.Minute;
+                    }
+
+                    return false;
+                }).Select(e => e.Email).ToList(), 
+                $"PXL Menu {DateTime.Today.Year}-{DateTime.Today.Month}-{DateTime.Today.Day}",
+                $"<h2>PXL Menu on: {DateTime.Today.Year}-{DateTime.Today.Month}-{DateTime.Today.Day} </h2>" +
+                $"<br/>{(await GetMenuItemsAsync()).Aggregate((e1, e2) => e1 + "<br/>" + e2)}"
+                );
         }
 
         static async Task<IEnumerable<string>> GetMenuItemsAsync()
@@ -36,24 +59,6 @@ namespace PXLCateringNotification
             return pageContent.Substring(beginIndex, endIndex - beginIndex).Split("<p>")
                 .AsSpan().Slice(1).ToArray()
                 .ToList().Select(e => e.Replace("</p>", ""));
-        }
-
-        static async Task SendMailAsync(string email)
-        {
-            var mail = new MailMessage("cateringnotification@gmail.com", email);
-            var client = new SmtpClient
-            {
-                Port = 587,
-                EnableSsl = true,
-                DeliveryMethod = SmtpDeliveryMethod.Network,
-                UseDefaultCredentials = false,
-                Host = "smtp.gmail.com",
-                Credentials = new NetworkCredential("cateringnotification@gmail.com", "Test123?")
-            };
-            mail.Subject = "PXL Menu " + DateTime.Today.ToShortDateString();
-            mail.Body = "<h2>PXL Menu on: " + DateTime.Today.ToShortDateString() + "</h2><br/>" + (await GetMenuItemsAsync()).Aggregate((e1, e2) => e1 + "<br/>" + e2);
-            mail.IsBodyHtml = true;
-            client.Send(mail);
         }
     }
 }
