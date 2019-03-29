@@ -11,7 +11,7 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: publish
-    arguments: '--configuration Release --output publish_output'
+    arguments: '--configuration Release --output $(System.DefaultWorkingDirectory)/publish_output'
     projects: '**\*.csproj'
     publishWebProjects: false
     modifyOutputPath: true
