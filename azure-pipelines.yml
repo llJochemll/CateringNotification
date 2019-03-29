@@ -2,30 +2,65 @@ trigger:
 - master
 
 pool:
-  vmImage: 'VS2017-Win2016'
-
-variables:
-  buildConfiguration: 'Release'
+  name: Hosted VS2017
+  demands:
+  - msbuild
+  - visualstudio
+  - vstest
 
 steps:
-- script: |
-    dotnet restore
-    dotnet build --configuration Release
-- task: DotNetCoreCLI@2
+- task: NuGetToolInstaller@0
+  displayName: 'Use NuGet 4.4.1'
   inputs:
-    command: publish
-    arguments: '--configuration Release --output publish_output'
-    projects: '*.csproj'
-    publishWebProjects: false
-    modifyOutputPath: true
-    zipAfterPublish: false
+    versionSpec: 4.4.1
+
+- task: NuGetCommand@2
+  displayName: 'NuGet restore'
+  inputs:
+    restoreSolution: '$(Parameters.solution)'
+
+- task: VSBuild@1
+  displayName: 'Build solution'
+  inputs:
+    solution: '$(Parameters.solution)'
+    msbuildArgs: '/p:DeployOnBuild=true /p:DeployDefaultTarget=WebPublish /p:WebPublishMethod=FileSystem /p:publishUrl="$(Agent.TempDirectory)\WebAppContent\\"'
+    platform: '$(BuildPlatform)'
+    configuration: '$(BuildConfiguration)'
+
+- task: CopyFiles@2
+  displayName: 'Copy Files to: $(Agent.TempDirectory)\WebAppContent'
+  inputs:
+    SourceFolder: '$(Build.SourcesDirectory)'
+    Contents: '**\bin\**\*.pdb'
+    TargetFolder: '$(Agent.TempDirectory)\WebAppContent'
+
 - task: ArchiveFiles@2
-  displayName: "Archive files"
+  displayName: 'Archive Files'
   inputs:
-    rootFolderOrFile: "$(System.DefaultWorkingDirectory)/publish_output/s"
+    rootFolderOrFile: '$(Agent.TempDirectory)\WebAppContent'
     includeRootFolder: false
-    archiveFile: "$(System.DefaultWorkingDirectory)/build$(Build.BuildId).zip"
-- task: PublishBuildArtifacts@1
+
+- task: VSTest@2
+  displayName: 'Test Assemblies'
   inputs:
-    PathtoPublish: '$(System.DefaultWorkingDirectory)/$(Build.BuildId).zip'
-    name: 'drop'
+    testAssemblyVer2: |
+     **\$(BuildConfiguration)\*test*.dll
+     !**\obj\**
+    platform: '$(BuildPlatform)'
+    configuration: '$(BuildConfiguration)'
+
+- task: PublishSymbols@2
+  displayName: 'Publish symbols path'
+  inputs:
+    SearchPattern: '**\bin\**\*.pdb'
+    PublishSymbols: false
+    SymbolsArtifactName: symbols
+  continueOnError: true
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
+  inputs:
+
+    PathtoPublish: '$(build.artifactstagingdirectory)'
+
+    ArtifactName: '$(Parameters.ArtifactName)'
