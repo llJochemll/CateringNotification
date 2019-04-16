@@ -80,7 +80,7 @@ namespace PXLCateringNotification
             }
             
 
-            await Mail.SendMailAsync(new List<string>(new string[] { subscription.Email }), "Catering Notification - Bevestiging inschrijving", $"Gebruik de code {subscription.Token} om je inschrijving op de dagelijkse email van de catering van de Elfde Linie te updaten of te activeren. Deze kan je ingeven op https://cateringstorage.z6.web.core.windows.net/ .");
+            await Mail.SendMailAsync(new List<string>(new string[] { subscription.Email }), "Catering Notification - Bevestiging inschrijving", $"Gebruik de code {subscription.Token} om je inschrijving op de dagelijkse email van de catering van de Elfde Linie te updaten of te activeren. Deze kan je ingeven op https://cateringstorage.z6.web.core.windows.net/verify .");
 
             return new OkResult();
         }
