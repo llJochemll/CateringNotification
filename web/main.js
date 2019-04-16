@@ -20,8 +20,9 @@ var Verification = /** @class */ (function () {
 }());
 function getNotificationTime(day) {
     var notificationTime = new NotificationTime();
-    notificationTime.Hour = +document.getElementById(day + 'Hour').value;
-    notificationTime.Minute = +document.getElementById(day + 'Minute').value;
+    var time = document.getElementById(day).value.split(':');
+    notificationTime.Hour = +time[0];
+    notificationTime.Minute = +time[1];
     return notificationTime;
 }
 function subscribe() {

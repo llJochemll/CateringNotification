@@ -23,8 +23,9 @@ class Verification {
 
 function getNotificationTime(day: string): NotificationTime {
     let notificationTime = new NotificationTime();
-    notificationTime.Hour = +(<HTMLInputElement>document.getElementById(day + 'Hour')).value;
-    notificationTime.Minute = +(<HTMLInputElement>document.getElementById(day + 'Minute')).value;
+    let time = (<HTMLInputElement>document.getElementById(day)).value.split(':');
+    notificationTime.Hour = +time[0];
+    notificationTime.Minute = +time[1];
 
     return notificationTime;
 }
