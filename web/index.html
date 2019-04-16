@@ -3,30 +3,68 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Catering notification</title>
+    <title>Catering Notification</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/ico" href="./images/favicon.ico">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-    <label>Email:</label>
-    <input type="email" name="email" id="email" style="width: 300px;">
-    <br />
-    <label>Monday:</label>
-    <input type="number" name="hour" id="mondayHour">:<input type="number" name="minute" id="mondayMinute">
-    <br />
-    <label>Tuesday:</label>
-    <input type="number" name="hour" id="tuesdayHour">:<input type="number" name="minute" id="tuesdayMinute">
-    <br />
-    <label>Wednesday:</label>
-    <input type="number" name="hour" id="wednesdayHour">:<input type="number" name="minute" id="wednesdayMinute">
-    <br />
-    <label>Thursday:</label>
-    <input type="number" name="hour" id="thursdayHour">:<input type="number" name="minute" id="thursdayMinute">
-    <br />
-    <label>Friday:</label>
-    <input type="number" name="hour" id="fridayHour">:<input type="number" name="minute" id="fridayMinute">
-    <br />
-    <button onclick="subscribe()">Subscribe</button>
-
+    <div class="container notification-container">
+    <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 notification-form-1">
+    <img class="img-fluid" src="./images/pxl_catering_notification.png">
+    <br>
+    <br>
+    <div class="form-group">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <p class="col-md-10">Wil jij elke dag weten wat er op het menu van de catering van de Elfde Linie staat? Vul hieronder dan jouw email in en kies op welk uur jij een email met de dagelijkse kost wilt ontvangen!</p>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <label class="col-md-3" for="email">Email:</label>
+        <input onchange="checkInputEmail()" onkeyup="checkInputEmail()" class="form-control col-md-6" type="email" name="email" id="email">
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <label for="monday" class="col-md-3">Maandag:</label>
+        <input class="form-control col-md-3" type="time" value="11:45" name="monday" id="monday">
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <label for="tuesday" class="col-md-3">Dinsdag:</label>
+        <input class="form-control col-md-3" type="time" value="11:45" name="tuesday" id="tuesday">
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <label for="wednesday" class="col-md-3">Woensdag:</label>
+        <input class="form-control col-md-3" type="time" value="11:45" name="wednesday" id="wednesday">
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <label for="thursday" class="col-md-3">Donderdag:</label>
+        <input class="form-control col-md-3" type="time" value="11:45" name="thursday" id="thursday">
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <label for="friday" class="col-md-3">Vrijdag:</label>
+        <input class="form-control col-md-3" type="time" value="11:45" name="friday" id="friday">
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <button disabled class="col-md-6 btn btn-success" onclick="subscribe()" name="submit" id="submit" type="submit" class="btnSubmit">Inschrijven</button>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+</div>
+<div class="col-md-2"></div>
+</div>
+</div>
+    <div style="font-weight:bold; text-align:right;position: absolute;bottom: 0; right: 5px;">Gemaakt door J&J</div>
     <script src="./main.js"></script>
 </body>
 </html>
