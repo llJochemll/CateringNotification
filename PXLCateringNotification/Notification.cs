@@ -43,8 +43,8 @@ namespace PXLCateringNotification
 
                     return false;
                 }).Select(e => e.Email).ToList(), 
-                $"PXL Menu {DateTime.Today.Year}-{DateTime.Today.Month}-{DateTime.Today.Day}",
-                $"<h2>PXL Menu on: {DateTime.Today.Year}-{DateTime.Today.Month}-{DateTime.Today.Day} </h2>" +
+                $"PXL Menu {DateTime.Today.Day}-{DateTime.Today.Month}-{DateTime.Today.Year}",
+                $"<h2>PXL Menu op: {DateTime.Today.Day}-{DateTime.Today.Month}-{DateTime.Today.Year} </h2>" +
                 $"<br/>{(await GetMenuItemsAsync()).Aggregate((e1, e2) => e1 + "<br/>" + e2)}"
                 );
         }
