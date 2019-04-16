@@ -46,6 +46,13 @@ function subscribe() {
     xmlhttp.open('POST', 'https://pxlcateringnotification.azurewebsites.net/api/subscribe', true);
     xmlhttp.setRequestHeader('Content-type', 'application/json');
     xmlhttp.send(JSON.stringify(subscription));
+    xmlhttp.onload = function() {
+        if (xmlhttp.status != 200) {
+          alert(`Oeps, er trad een error op! Weet je zeker dat alle gegevens correct zijn?`);
+        } else {
+            window.location.href = "https://cateringstorage.z6.web.core.windows.net/verify?email=" + subscription.Email;
+        }
+    };
 }
 
 function verify() {
@@ -58,4 +65,35 @@ function verify() {
     xmlhttp.open('POST', 'https://pxlcateringnotification.azurewebsites.net/api/verify', true);
     xmlhttp.setRequestHeader('Content-type', 'application/json');
     xmlhttp.send(JSON.stringify(verification));
+    xmlhttp.onload = function() {
+        if (xmlhttp.status != 200) {
+          alert(`Oeps, er trad een error op! Weet je zeker dat je email en token correct zijn?`);
+        } else {
+          alert(`Je bevestiging is succesvol doorgegeven!`);
+        }
+    };
+}
+
+function getEmailFromURL() {
+    let url = new URL(window.location.href);
+    let email = url.searchParams.get("email");
+    (<HTMLInputElement>document.getElementById('email')).value = email;
+}
+
+function checkInput() {
+    const expression = /\S+@\S+/;
+    if ((<HTMLInputElement>document.getElementById('token')).value.length === 6 && expression.test(String((<HTMLInputElement>document.getElementById('email')).value).toLowerCase())) {
+        (<HTMLInputElement>document.getElementById('submit')).disabled = false;
+    } else {
+        (<HTMLInputElement>document.getElementById('submit')).disabled = true;
+    }
+}
+
+function checkInputEmail() {
+    const expression = /\S+@\S+/;
+    if (expression.test(String((<HTMLInputElement>document.getElementById('email')).value).toLowerCase())) {
+        (<HTMLInputElement>document.getElementById('submit')).disabled = false;
+    } else {
+        (<HTMLInputElement>document.getElementById('submit')).disabled = true;
+    }
 }

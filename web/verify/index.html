@@ -3,19 +3,48 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Cateringnotification</title>
+    <title>Catering Notification</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+    <link rel="icon" type="image/ico" href="../images/favicon.ico">
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<body>
-    <label>Email:</label>
-    <input type="email" name="email" id="email" style="width:300px;">
-    <br />
-    <label>Token:</label>
-    <input type="number" name="token" id="token" style="width:300px;">
-    <br />
-    <button onclick="verify()">Verify</button>
-
+<body onload="getEmailFromURL()">
+    <div class="container notification-container">
+    <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 notification-form-1">
+    <img class="img-fluid" src="../images/pxl_catering_notification.png">
+    <br>
+    <br>
+    <div class="form-group">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <p class="col-md-10">Bevestig hier je inschrijving door je token in te vullen. Deze heb je hopelijk ondertussen in je mailbox ontvangen!</p>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <label class="col-md-3" for="email">Email:</label>
+        <input onchange="checkInput()" onkeyup="checkInput()" class="form-control col-md-6" type="email" name="email" id="email">
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <label class="col-md-3" for="token">Token:</label>
+        <input onchange="checkInput()" onkeyup="checkInput()" class="form-control col-md-6" type="number" name="token" id="token">
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <button disabled class="col-md-6 btn btn-success" onclick="verify()" type="submit" name="submit" id="submit" class="btnSubmit">Bevestigen</button>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+</div>
+<div class="col-md-2"></div>
+</div>
+</div>
+    <div style="font-weight:bold; text-align:right;position: absolute;bottom: 0; right: 5px;">Gemaakt door J&J</div>
     <script src="../main.js"></script>
 </body>
 </html>

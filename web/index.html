@@ -20,8 +20,12 @@
     <div class="form-group">
     <div class="row">
         <div class="col-md-1"></div>
+        <p class="col-md-10">Wil jij elke dag weten wat er op het menu van de catering van de Elfde Linie staat? Vul hieronder dan jouw email in en kies op welk uur jij een email met de dagelijkse kost wilt ontvangen!</p>
+    </div>
+    <div class="row">
+        <div class="col-md-1"></div>
         <label class="col-md-3" for="email">Email:</label>
-        <input class="form-control col-md-6" type="email" name="email" id="email">
+        <input onchange="checkInputEmail()" onkeyup="checkInputEmail()" class="form-control col-md-6" type="email" name="email" id="email">
     </div>
     <br>
     <div class="row">
@@ -52,7 +56,7 @@
     <br>
     <div class="row">
         <div class="col-md-3"></div>
-        <button class="col-md-6 btn btn-success" onclick="subscribe()" type="submit" class="btnSubmit">Inschrijven</button>
+        <button disabled class="col-md-6 btn btn-success" onclick="subscribe()" name="submit" id="submit" type="submit" class="btnSubmit">Inschrijven</button>
         <div class="col-md-3"></div>
     </div>
 </div>
