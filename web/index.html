@@ -20,38 +20,83 @@
     <div class="form-group">
     <div class="row">
         <div class="col-md-1"></div>
-        <p class="col-md-10">Wil jij elke dag weten wat er op het menu van de catering van de Elfde Linie staat? Vul hieronder dan jouw email in en kies op welk uur jij een email met de dagelijkse kost wilt ontvangen!</p>
+        <p class="col-md-10">Wil jij elke dag weten wat er op het menu van de catering staat? Vul hieronder dan jouw email in en kies op welk uur jij een email met de dagelijkse kost wilt ontvangen!</p>
     </div>
     <div class="row">
         <div class="col-md-1"></div>
-        <label class="col-md-3" for="email">Email:</label>
-        <input onchange="checkInputEmail()" onkeyup="checkInputEmail()" class="form-control col-md-6" type="email" name="email" id="email">
+        <label class="col-md-2" for="email">Email:</label>
+        <input onchange="checkEmailInput()" onkeyup="checkEmailInput()" class="form-control col-md-8" type="email" name="email" id="email">
     </div>
     <br>
     <div class="row">
         <div class="col-md-1"></div>
-        <label for="monday" class="col-md-3">Maandag:</label>
+        <label for="monday" class="col-md-2">Maandag:</label>
         <input class="form-control col-md-3" type="time" value="11:45" name="monday" id="monday">
+        <select name="monday_location" id="monday_location" class="form-control col-md-3 ml-3">
+            <option>Elfde Linie</option>
+            <option>Diepenbeek</option>
+            <option>Vildersstraat</option>
+        </select>
+        <div class="custom-control custom-checkbox ml-3" style="align-self:center;">
+            <input type="checkbox" class="custom-control-input" id="no_monday" name="no_monday" onchange="no_email_clicked('monday')">
+            <label class="custom-control-label" for="no_monday">Geen mail</label>
+        </div>
     </div>
     <div class="row">
         <div class="col-md-1"></div>
-        <label for="tuesday" class="col-md-3">Dinsdag:</label>
+        <label for="tuesday" class="col-md-2">Dinsdag:</label>
         <input class="form-control col-md-3" type="time" value="11:45" name="tuesday" id="tuesday">
+        <select name="tuesday_location" id="tuesday_location" class="form-control col-md-3 ml-3">
+            <option>Elfde Linie</option>
+            <option>Diepenbeek</option>
+            <option>Vildersstraat</option>
+        </select>
+        <div class="custom-control custom-checkbox ml-3" style="align-self:center;">
+        <input type="checkbox" class="custom-control-input" id="no_tuesday" name="no_tuesday" onchange="no_email_clicked('tuesday')">
+        <label class="custom-control-label" for="no_tuesday">Geen mail</label>
+        </div>
     </div>
     <div class="row">
         <div class="col-md-1"></div>
-        <label for="wednesday" class="col-md-3">Woensdag:</label>
+        <label for="wednesday" class="col-md-2">Woensdag:</label>
         <input class="form-control col-md-3" type="time" value="11:45" name="wednesday" id="wednesday">
+        <select name="wednesday_location" id="wednesday_location" class="form-control col-md-3 ml-3">
+            <option>Elfde Linie</option>
+            <option>Diepenbeek</option>
+            <option>Vildersstraat</option>
+        </select>
+        <div class="custom-control custom-checkbox ml-3" style="align-self:center;">
+        <input type="checkbox" class="custom-control-input" id="no_wednesday" name="no_wednesday" onchange="no_email_clicked('wednesday')">
+        <label class="custom-control-label" for="no_wednesday">Geen mail</label>
+        </div>
     </div>
     <div class="row">
         <div class="col-md-1"></div>
-        <label for="thursday" class="col-md-3">Donderdag:</label>
+        <label for="thursday" class="col-md-2">Donderdag:</label>
         <input class="form-control col-md-3" type="time" value="11:45" name="thursday" id="thursday">
+        <select name="thursday_location" id="thursday_location" class="form-control col-md-3 ml-3">
+            <option>Elfde Linie</option>
+            <option>Diepenbeek</option>
+            <option>Vildersstraat</option>
+        </select>
+        <div class="custom-control custom-checkbox ml-3" style="align-self:center;">
+        <input type="checkbox" class="custom-control-input" id="no_thursday" name="no_thursday" onchange="no_email_clicked('thursday')">
+        <label class="custom-control-label" for="no_thursday">Geen mail</label>
+        </div>
     </div>
     <div class="row">
         <div class="col-md-1"></div>
-        <label for="friday" class="col-md-3">Vrijdag:</label>
+        <label for="friday" class="col-md-2">Vrijdag:</label>
         <input class="form-control col-md-3" type="time" value="11:45" name="friday" id="friday">
+        <select name="friday_location" id="friday_location" class="form-control col-md-3 ml-3">
+            <option>Elfde Linie</option>
+            <option>Diepenbeek</option>
+            <option>Vildersstraat</option>
+        </select>
+        <div class="custom-control custom-checkbox ml-3" style="align-self:center;">
+        <input type="checkbox" class="custom-control-input" id="no_friday" name="no_friday" onchange="no_email_clicked('friday')">
+        <label class="custom-control-label" for="no_friday">Geen mail</label>
+        </div>
     </div>
     <br>
     <div class="row">
