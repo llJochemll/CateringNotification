@@ -7,15 +7,15 @@ using System.Linq;
 using System.Collections.Generic;
 using Microsoft.WindowsAzure.Storage.Table;
 
-namespace PXLCateringNotification
+namespace PXLCateringNotification.Functions
 {
-    public static class Notification
+    public static class NotificationFunctions
     {
         [FunctionName("SendNotification")]
         public static async Task SendNotificationAsync([TimerTrigger("0 */1 10-15 * * 1-5")]TimerInfo myTimer, ILogger log)
         {
             var subscriptionsTable = await Table.GetTableAsync("subscriptions");
-            var queryResult = await subscriptionsTable.ExecuteQuerySegmentedAsync(new TableQuery<Subscription.UserSubscription>(), new TableContinuationToken());
+            var queryResult = await subscriptionsTable.ExecuteQuerySegmentedAsync(new TableQuery<SubscriptionFunctions.UserSubscription>(), new TableContinuationToken());
 
             var subscriptions = queryResult.ToList();
 

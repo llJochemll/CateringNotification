@@ -5,7 +5,7 @@ using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PXLCateringNotification
+namespace PXLCateringNotification.Utility
 {
     public static class Mail
     {
@@ -13,8 +13,8 @@ namespace PXLCateringNotification
         {
             var mail = new MailMessage("cateringnotification@gmail.com", "cateringnotification@gmail.com")
             {
-                Subject = subject,//$"PXL Menu {DateTime.Today.Year}-{DateTime.Today.Month}-{DateTime.Today.Day}",
-                Body = body,//$"<h2>PXL Menu on: {DateTime.Today.Year}-{DateTime.Today.Month}-{DateTime.Today.Day} </h2><br/>{(await GetMenuItemsAsync()).Aggregate((e1, e2) => e1 + "<br/>" + e2)}",
+                Subject = subject,
+                Body = body,
                 IsBodyHtml = true
             };
 
