@@ -17,13 +17,11 @@ steps:
   inputs:
     projects: '**/*.csproj'
     arguments: '--configuration Release --output $(System.DefaultWorkingDirectory)/publish_output'
-- task: VisualStudioTestPlatformInstaller@1
+- task: DotNetCoreCLI@2
+  displayName: 'Test project'
   inputs:
-    packageFeedSelector: 'nugetOrg'
-- task: VSTest@2
-  displayName: 'VsTest - testAssemblies'
-- task: PublishTestResults@2
-  displayName: 'Publish Test Results **/TEST-*.xml'
+    command: test
+    projects: '**/*.csproj'
 - script: |
     bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN
   displayName: 'Upload code coverage'
