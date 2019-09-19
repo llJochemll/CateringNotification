@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28606.126
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PXLCateringNotification", "PXLCateringNotification\PXLCateringNotification.csproj", "{56C282A2-C125-4608-9CF5-54C5C3E787F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CateringNotification", "CateringNotification\CateringNotification.csproj", "{E35982D1-4FBB-43CE-80B7-D2C92A80ABBC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{56C282A2-C125-4608-9CF5-54C5C3E787F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{56C282A2-C125-4608-9CF5-54C5C3E787F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{56C282A2-C125-4608-9CF5-54C5C3E787F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{56C282A2-C125-4608-9CF5-54C5C3E787F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E35982D1-4FBB-43CE-80B7-D2C92A80ABBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E35982D1-4FBB-43CE-80B7-D2C92A80ABBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E35982D1-4FBB-43CE-80B7-D2C92A80ABBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E35982D1-4FBB-43CE-80B7-D2C92A80ABBC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

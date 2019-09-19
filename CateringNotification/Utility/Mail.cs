@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Net.Mail;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace PXLCateringNotification.Utility
+namespace CateringNotification.Utility
 {
-    public static class Mail
+    internal static class Mail
     {
-        public static async Task SendMailAsync(List<string> to, string subject, string body)
+        internal static async Task SendMailAsync(List<string> to, string subject, string body)
         {
             var mail = new MailMessage("cateringnotification@gmail.com", "cateringnotification@gmail.com")
             {
