@@ -34,7 +34,12 @@ namespace CateringNotification.Functions
 
             if (notificationSettings.ContainsKey(Subscription.UserSubscription.Campus.ElfdeLinie))
             {
-                var settings = notificationSettings[Subscription.UserSubscription.Campus.ElfdeLinie];
+                var settings = notificationSettings[Subscription.UserSubscription.Campus.ElfdeLinie].ToList();
+
+                if (!settings.Any())
+                {
+                    return;
+                }
 
                 await Mail.SendMailAsync(settings.Select(ns => ns.Email).ToList(),
                     $"PXL Menu {DateTime.Today.Day}-{DateTime.Today.Month}-{DateTime.Today.Year}",
