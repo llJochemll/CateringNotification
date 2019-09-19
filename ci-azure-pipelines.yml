@@ -4,7 +4,7 @@ pr:
   - master
 
 pool:
-  vmImage: 'VS2017-Win2016'
+  vmImage: 'ubuntu-latest'
 
 steps:
 - task: DotNetCoreCLI@2
@@ -17,8 +17,13 @@ steps:
   inputs:
     projects: '**/*.csproj'
     arguments: '--configuration Release --output $(System.DefaultWorkingDirectory)/publish_output'
+- task: VisualStudioTestPlatformInstaller@1
+  inputs:
+    packageFeedSelector: 'nugetOrg'
 - task: VSTest@2
   displayName: 'VsTest - testAssemblies'
+- task: PublishTestResults@2
+  displayName: 'Publish Test Results **/TEST-*.xml'
 - script: |
     bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN
   displayName: 'Upload code coverage'
