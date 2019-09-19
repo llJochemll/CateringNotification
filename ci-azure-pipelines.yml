@@ -1,0 +1,26 @@
+trigger:
+  - master
+pr:
+  - master
+
+pool:
+  vmImage: 'VS2017-Win2016'
+
+steps:
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet restore'
+  inputs:
+    command: restore
+    projects: '**/*.csproj'
+- task: DotNetCoreCLI@2
+  displayName: 'Build project'
+  inputs:
+    projects: '**/*.csproj'
+    arguments: '--configuration Release --output $(System.DefaultWorkingDirectory)/publish_output'
+- task: VSTest@2
+  displayName: 'VsTest - testAssemblies'
+- script: |
+    bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN
+  displayName: 'Upload code coverage'
+  env:
+    CODECOV_TOKEN: $(CODECOV_TOKEN)
