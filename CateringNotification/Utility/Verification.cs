@@ -26,14 +26,14 @@ namespace CateringNotification.Utility
         internal static async Task<bool> Verify(string email, string token)
         {
             var verificationsTable = await Table.GetTableAsync("catering");
-            var result = (await verificationsTable.ExecuteAsync(TableOperation.Retrieve<VerificationToken>("ver", email))).Result as VerificationToken;
+            var result = (await verificationsTable.ExecuteAsync(TableOperation.Retrieve<VerificationToken>("verification", email))).Result as VerificationToken;
 
             return result?.Token == token;
         }
 
         private class VerificationToken : TableEntity
         {
-            internal string Token { get; set; }
+            public string Token { get; set; }
         }
     }
 }

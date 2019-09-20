@@ -1,2 +1,3 @@
-[![Build Status](https://dev.azure.com/jochemdejaeghere/github-pipes/_apis/build/status/llJochemll.CateringNotification?branchName=master)](https://dev.azure.com/jochemdejaeghere/github-pipes/_build/latest?definitionId=2&branchName=master)
+[![Build Status](https://dev.azure.com/jochemdejaeghere/github/_apis/build/status/cateringnotification/CI?branchName=master)](https://dev.azure.com/jochemdejaeghere/github/_build/latest?definitionId=2&branchName=master)
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=llJochemll/CateringNotification)](https://dependabot.com)
+[![Board Status](https://dev.azure.com/jochemdejaeghere/327efddf-5029-4adf-8ed4-0ed868c6ade2/67704b16-47d5-44c2-aa00-23d2329bd31a/_apis/work/boardbadge/ee7df935-f658-4111-9406-46db1a9af2dc?columnOptions=1)](https://dev.azure.com/jochemdejaeghere/327efddf-5029-4adf-8ed4-0ed868c6ade2/_boards/board/t/67704b16-47d5-44c2-aa00-23d2329bd31a/Microsoft.FeatureCategory/)

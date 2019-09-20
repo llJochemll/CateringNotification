@@ -1,7 +1,9 @@
 trigger:
   - master
 pr:
-  - none
+  branches:
+    exclude:
+    - master
 
 pool:
   vmImage: 'windows-latest'
@@ -16,12 +18,26 @@ steps:
   displayName: 'Build project'
   inputs:
     projects: '**/*.csproj'
-    arguments: '--configuration Release --output $(System.DefaultWorkingDirectory)/publish_output'
+    arguments: '--configuration Release --output $(System.DefaultWorkingDirectory)/functions'
 - task: ArchiveFiles@2
   displayName: 'Archive files'
   inputs:
-    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/publish_output'
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/functions'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/functions/$(Build.BuildId).zip'
     includeRootFolder: false
+- script: |
+    cd web
+    tsc main.ts -t ES2019
+- task: CopyFiles@2
+  inputs:
+    contents: 'web/**'
+    targetFolder: $(System.DefaultWorkingDirectory)/web/
 - task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: drop'
+  inputs:
+    pathToPublish: $(Build.ArtifactStagingDirectory)/functions
+    artifactName: functions
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: $(Build.ArtifactStagingDirectory)/web
+    artifactName: web
 
