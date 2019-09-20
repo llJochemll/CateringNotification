@@ -25,17 +25,17 @@ steps:
     rootFolderOrFile: '$(System.DefaultWorkingDirectory)/functions'
     archiveFile: '$(Build.ArtifactStagingDirectory)/functions/$(Build.BuildId).zip'
     includeRootFolder: false
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathToPublish: $(Build.ArtifactStagingDirectory)/functions
+    artifactName: functions
 - script: |
     cd web
     tsc main.ts -t ES2019
 - task: CopyFiles@2
   inputs:
     contents: 'web/**'
-    targetFolder: $(System.DefaultWorkingDirectory)/web/
-- task: PublishBuildArtifacts@1
-  inputs:
-    pathToPublish: $(Build.ArtifactStagingDirectory)/functions
-    artifactName: functions
+    targetFolder: $(Build.ArtifactStagingDirectory)/web/
 - task: PublishBuildArtifacts@1
   inputs:
     pathToPublish: $(Build.ArtifactStagingDirectory)/web
