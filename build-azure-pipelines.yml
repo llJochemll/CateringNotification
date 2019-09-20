@@ -1,7 +1,9 @@
 trigger:
   - master
 pr:
-  - none
+  branches:
+    exclude:
+    - master
 
 pool:
   vmImage: 'windows-latest'
@@ -24,8 +26,8 @@ steps:
     archiveFile: '$(Build.ArtifactStagingDirectory)/functions/$(Build.BuildId).zip'
     includeRootFolder: false
 - script: |
-  cd web
-  tsc main.ts -t ES2019
+    cd web
+    tsc main.ts -t ES2019
 - task: CopyFiles@2
   inputs:
     contents: 'web/**'
