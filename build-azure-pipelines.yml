@@ -10,11 +10,6 @@ pool:
 
 steps:
 - task: DotNetCoreCLI@2
-  displayName: 'dotnet restore'
-  inputs:
-    command: restore
-    projects: '**/*.csproj'
-- task: DotNetCoreCLI@2
   displayName: 'Build project'
   inputs:
     projects: '**/*.csproj'
