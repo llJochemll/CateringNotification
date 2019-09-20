@@ -7,21 +7,21 @@ using System.Threading.Tasks;
 
 namespace CateringNotification.Data
 {
-    internal class Subscription : TableEntity
+    public class Subscription : TableEntity
     {
         public class UserSubscription
         {
             public enum Campus
             {
-                DiepenBeek,
+                Diepenbeek,
                 ElfdeLinie,
-                VilderStraat
+                Vildersstraat
             }
 
             public class NotificationSetting
             {
-                internal int Hour { get; set; }
-                internal int Minute { get; set; }
+                public int Hour { get; set; }
+                public int Minute { get; set; }
             }
 
             public Dictionary<DayOfWeek, KeyValuePair<Campus, NotificationSetting>> NotificationSettings { get; set; }

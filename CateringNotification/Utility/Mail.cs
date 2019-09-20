@@ -16,12 +16,13 @@ namespace CateringNotification.Utility
                 EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = false,
-                Host = "smtp.gmail.com",
+                Host = "smtp.office365.com",
                 Credentials = new NetworkCredential(Environment.GetEnvironmentVariable("MAIL_USERNAME"),
-                    Environment.GetEnvironmentVariable("MAIL_PASSWORD"))
+                    Environment.GetEnvironmentVariable("MAIL_PASSWORD")),
+                TargetName = "STARTTLS/smtp.office365.com"
             })
             {
-                using (var mail = new MailMessage("cateringnotification@gmail.com", "cateringnotification@gmail.com")
+                using (var mail = new MailMessage("no-reply@pxlfood.be", "no-reply@pxlfood.be")
                 {
                     Subject = subject,
                     Body = body,
