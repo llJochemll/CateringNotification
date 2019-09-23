@@ -17,8 +17,4 @@ steps:
   inputs:
     command: test
     projects: '**/*.csproj'
-- script: |
-    bash <(curl -s https://codecov.io/bash) -t $CODECOV_TOKEN
-  displayName: 'Upload code coverage'
-  env:
-    CODECOV_TOKEN: $(CODECOV_TOKEN)
+    arguments: '--collect "Code coverage"'
