@@ -1,9 +1,9 @@
 using CateringNotification.Content.Campus;
 using CateringNotification.Data;
 using CateringNotification.Utility;
+using Microsoft.Azure.Cosmos.Table;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
-using Microsoft.WindowsAzure.Storage.Table;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
