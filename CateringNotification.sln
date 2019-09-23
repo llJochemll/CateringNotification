@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.28606.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CateringNotification", "CateringNotification\CateringNotification.csproj", "{E35982D1-4FBB-43CE-80B7-D2C92A80ABBC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CateringNotification.Tests", "CateringNotification.Tests\CateringNotification.Tests.csproj", "{80608EFD-C09D-4B9B-A979-48921B210207}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{E35982D1-4FBB-43CE-80B7-D2C92A80ABBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E35982D1-4FBB-43CE-80B7-D2C92A80ABBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E35982D1-4FBB-43CE-80B7-D2C92A80ABBC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80608EFD-C09D-4B9B-A979-48921B210207}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80608EFD-C09D-4B9B-A979-48921B210207}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80608EFD-C09D-4B9B-A979-48921B210207}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80608EFD-C09D-4B9B-A979-48921B210207}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
