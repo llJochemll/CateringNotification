@@ -91,7 +91,7 @@ namespace CateringNotification.Functions
 
             await Mail.SendMailAsync(new List<string>(new[] {subscription.Email}), 
                 "Catering Notification - Bevestiging verandering",
-                "Je hebt je inschrijving succesvol veranderd! Indien je de uren van de emails wilt aanpassen, kan je altijd opnieuw inschrijven op https://www.pxlfood.be/ .");
+                "Je hebt je inschrijving succesvol veranderd! Indien je de uren van de emails wilt aanpassen, kan je altijd opnieuw inschrijven op <a href=\"https://www.pxlfood.be/ \">pxlfood.be</a>.");
 
             return new OkResult();
         }
