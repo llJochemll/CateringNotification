@@ -37,7 +37,7 @@ namespace CateringNotification.Functions
 
             await Mail.SendMailAsync(new List<string>(new[] {subscription.Email}),
                 "Catering Notification - Bevestiging inschrijving",
-                $"<p>Gebruik de code <strong>{verificationToken}</strong> om je inschrijving op de dagelijkse e-mail van de catering te updaten of te activeren. Deze kan je ingeven op<a href=\"https://www.pxlfood.be/verify?email={subscription.Email} \">pxlfood.be</a>.</p>");
+                $"<p>Gebruik de code <strong>{verificationToken}</strong> om je inschrijving op de dagelijkse e-mail van de catering te updaten of te activeren. Deze kan je ingeven op <a href=\"https://www.pxlfood.be/verify?email={subscription.Email} \">pxlfood.be</a>.</p>");
 
             return new OkResult();
         }
@@ -62,7 +62,7 @@ namespace CateringNotification.Functions
 
             await Mail.SendMailAsync(new List<string>(new[] {subscription.Email}),
                 "Catering Notification - Bevestig uitschrijving",
-                $"Gebruik de code {verificationToken} om je inschrijving op de dagelijkse email van de catering op te zeggen. Deze kan je ingeven op https://www.pxlfood.be/verify?email={subscription.Email} .");
+                $"<p>Gebruik de code <strong>{verificationToken}</strong> om je inschrijving op de dagelijkse email van de catering op te zeggen. Deze kan je ingeven op <a href=\"https://www.pxlfood.be/verify?email={subscription.Email}\">pxlfood.be</a>.</p>");
 
             return new OkResult();
         }
