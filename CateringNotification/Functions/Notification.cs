@@ -16,6 +16,11 @@ namespace CateringNotification.Functions
         public static async Task SendNotificationAsync([TimerTrigger("0 */1 10-23 * * 1-5")] TimerInfo myTimer,
             ILogger log)
         {
+            if (Environment.GetEnvironmentVariable("ENVIRONMENT") == "dev")
+            {
+                return;
+            }
+
             var currentHour = DateTime.Now.Hour;
             var currentMinute = DateTime.Now.Minute;
 
