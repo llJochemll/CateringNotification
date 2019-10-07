@@ -19,9 +19,10 @@ namespace CateringNotification.Functions
             var currentHour = DateTime.Now.Hour;
             var currentMinute = DateTime.Now.Minute;
 
-            var table = await Table.GetTableAsync("subscriptions");
+            var table = await Table.GetTableAsync("catering");
 
-            var subscriptions = await table.ExecuteQuerySegmentedAsync(new TableQuery<Subscription>(),
+            var subscriptions = await table.ExecuteQuerySegmentedAsync(
+                new TableQuery<Subscription>().Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, "subscription")),
                 new TableContinuationToken());
 
             var notificationSettings = subscriptions
