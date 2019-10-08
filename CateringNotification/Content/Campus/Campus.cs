@@ -10,7 +10,12 @@ namespace CateringNotification.Content.Campus
     {
         internal static async Task<string> GetMenuAsync(string url)
         {
-            return "<div><p>" + string.Join("</p><p>", await GetMenuItemsAsync(url)) + "</p></div>";
+            return
+                "<div style=\" text-align: center;\">" +
+                "<h1  style=\"color: #58A518;\">Het menu van vandaag is:</h1><hr>" +
+                "<p style=\"font-family: impact; font-size: 18px;\">" +
+                string.Join("</p><p style=\"font-family: impact; font-size: 18px;\">", await GetMenuItemsAsync(url)) +
+                "</p></div>";
         }
 
         private static async Task<IEnumerable<string>> GetMenuItemsAsync(string url)
