@@ -13,15 +13,23 @@ namespace CateringNotification.Functions
     public static class NotificationFunctions
     {
         [FunctionName("SendNotification")]
-        public static async Task SendNotificationAsync([TimerTrigger("0 */1 10-23 * * 1-5")] TimerInfo myTimer,
+        public static async Task SendNotificationAsync([TimerTrigger("0 */1 8-20 * * 1-5")] TimerInfo myTimer,
             ILogger log)
         {
+            if (Environment.GetEnvironmentVariable("ENVIRONMENT") == "dev")
+            {
+                return;
+            }
+
+            await Task.Delay(100);
+
             var currentHour = DateTime.Now.Hour;
             var currentMinute = DateTime.Now.Minute;
 
-            var table = await Table.GetTableAsync("subscriptions");
+            var table = await Table.GetTableAsync("catering");
 
-            var subscriptions = await table.ExecuteQuerySegmentedAsync(new TableQuery<Subscription>(),
+            var subscriptions = await table.ExecuteQuerySegmentedAsync(
+                new TableQuery<Subscription>().Where(TableQuery.GenerateFilterCondition("PartitionKey", QueryComparisons.Equal, "subscription")),
                 new TableContinuationToken());
 
             var notificationSettings = subscriptions
