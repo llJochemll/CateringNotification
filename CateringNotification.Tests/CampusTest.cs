@@ -16,7 +16,7 @@ namespace CateringNotification.Tests
 
             //Assert
             Assert.NotNull(result);
-            Assert.Equal(18, result.Length);
+            Assert.Equal(155, result.Length);
         }
 
         [Fact]
@@ -29,7 +29,7 @@ namespace CateringNotification.Tests
 
             //Assert
             Assert.NotNull(result);
-            Assert.True(result.Length > 18);
+            Assert.True(result.Length > 155);
         }
     }
 }
