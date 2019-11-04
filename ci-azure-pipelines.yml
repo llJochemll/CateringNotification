@@ -17,4 +17,4 @@ steps:
   inputs:
     command: test
     projects: '**/*.csproj'
-    arguments: '--collect "Code coverage" --settings "CodeCoverage.runsettings"'
+    arguments: '--collect "Code coverage" --settings "CateringNotification.Tests/CodeCoverage.runsettings"'
