@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CateringNotification.Content.Campus
 {
-    internal static class Campus
+    public static class Campus
     {
-        internal static async Task<string> GetMenuAsync(string url)
+        public static async Task<string> GetMenuAsync(string url)
         {
             return
                 "<div style=\" text-align: center;\">" +
@@ -20,6 +20,11 @@ namespace CateringNotification.Content.Campus
 
         private static async Task<IEnumerable<string>> GetMenuItemsAsync(string url)
         {
+            if (string.IsNullOrEmpty(url))
+            {
+                return new List<string>();
+            }
+
             using (var httpClient = new HttpClient())
             {
                 var pageContent = await httpClient.GetStringAsync(url);

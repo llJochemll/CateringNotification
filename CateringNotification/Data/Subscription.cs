@@ -1,5 +1,5 @@
 using CateringNotification.Utility;
-using Microsoft.WindowsAzure.Storage.Table;
+using Microsoft.Azure.Cosmos.Table;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -50,7 +50,7 @@ namespace CateringNotification.Data
             await table.ExecuteAsync(TableOperation.InsertOrReplace(this));
         }
 
-        internal static async Task<Subscription> RetrieveAsync(string email)
+        public static async Task<Subscription> RetrieveAsync(string email)
         {
             var table = await Table.GetTableAsync("catering");
             return (await table.ExecuteAsync(TableOperation.Retrieve<Subscription>("subscription", email))).Result as Subscription;
