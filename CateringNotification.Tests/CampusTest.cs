@@ -16,7 +16,7 @@ namespace CateringNotification.Tests
 
             //Assert
             Assert.NotNull(result);
-            Assert.Equal(155, result.Length);
+            Assert.Equal(string.Empty, result);
         }
 
         [Fact]
