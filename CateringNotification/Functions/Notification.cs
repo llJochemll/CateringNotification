@@ -49,10 +49,18 @@ namespace CateringNotification.Functions
                     return;
                 }
 
+                string menu = await Campus.GetMenuAsync(
+                    "https://www.pxl.be/Pub/Studenten/Voorzieningen-Student/Catering/Weekmenu-Campus-Elfde-Linie.html");
+
+                if (menu == string.Empty)
+                {
+                    return;
+                }
+
                 await Mail.SendMailAsync(settings.Select(ns => ns.Email).ToList(),
                     $"PXL Menu {DateTime.Today.Day}-{DateTime.Today.Month}-{DateTime.Today.Year}",
-                    await Campus.GetMenuAsync(
-                        "https://www.pxl.be/Pub/Studenten/Voorzieningen-Student/Catering/Weekmenu-Campus-Elfde-Linie.html"));
+                    menu);
+
             }
         }
     }

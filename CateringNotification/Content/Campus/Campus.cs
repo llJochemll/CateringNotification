@@ -10,11 +10,18 @@ namespace CateringNotification.Content.Campus
     {
         public static async Task<string> GetMenuAsync(string url)
         {
+            IList<string> content = (await GetMenuItemsAsync(url)).ToList();
+
+            if (!content.Any())
+            {
+                return string.Empty;
+            }
+
             return
                 "<div style=\" text-align: center;\">" +
                 "<h1  style=\"color: #58A518;\">Het menu van vandaag is:</h1><hr>" +
                 "<p style=\"font-family: impact; font-size: 18px;\">" +
-                string.Join("</p><p style=\"font-family: impact; font-size: 18px;\">", await GetMenuItemsAsync(url)) +
+                string.Join("</p><p style=\"font-family: impact; font-size: 18px;\">", content) +
                 "</p></div>";
         }
 
