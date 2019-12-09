@@ -39,6 +39,8 @@ namespace CateringNotification.Functions
                 "Catering Notification - Bevestiging inschrijving",
                 $"<p>Gebruik de code <strong>{verificationToken}</strong> om je inschrijving op de dagelijkse e-mail van de catering te updaten of te activeren. Deze kan je ingeven op <a href=\"https://www.pxlfood.be/verify?email={subscription.Email} \">pxlfood.be</a>.</p>");
 
+            log.LogInformation($"New subscriber: {email}");
+
             return new OkResult();
         }
 
