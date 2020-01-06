@@ -57,6 +57,8 @@ namespace CateringNotification.Functions
                     return;
                 }
 
+                log.LogInformation($"Mails sent at {DateTime.Today.Day}-{DateTime.Today.Month}-{DateTime.Today.Year}");
+
                 await Mail.SendMailAsync(settings.Select(ns => ns.Email).ToList(),
                     $"PXL Menu {DateTime.Today.Day}-{DateTime.Today.Month}-{DateTime.Today.Year}",
                     menu);
