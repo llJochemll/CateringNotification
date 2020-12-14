@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -10,26 +8,9 @@ namespace CateringNotification.Content.Campus
     {
         public static async Task<string> GetMenuAsync(string url)
         {
-            IList<string> content = (await GetMenuItemsAsync(url)).ToList();
-
-            if (!content.Any())
-            {
-                return string.Empty;
-            }
-
-            return
-                "<div style=\" text-align: center;\">" +
-                "<h1  style=\"color: #58A518;\">Het menu van vandaag is:</h1><hr>" +
-                "<p style=\"font-family: impact; font-size: 18px;\">" +
-                string.Join("</p><p style=\"font-family: impact; font-size: 18px;\">", content) +
-                "</p></div>";
-        }
-
-        private static async Task<IEnumerable<string>> GetMenuItemsAsync(string url)
-        {
             if (string.IsNullOrEmpty(url))
             {
-                return new List<string>();
+                return null;
             }
 
             using (var httpClient = new HttpClient())
@@ -38,22 +19,22 @@ namespace CateringNotification.Content.Campus
 
                 if (pageContent == null)
                 {
-                    return new List<string>();
+                    return null;
                 }
 
-                var beginIndex = pageContent.IndexOf("<h3>Hoofdgerecht</h3>", StringComparison.Ordinal) + "<h3>Hoofdgerecht</h3>".Length;
-                var endIndex = pageContent.IndexOf("<p><strong>", beginIndex, StringComparison.Ordinal);
+
+
+                const string beginTag = "<div class=\"catering catering1\">";
+                const string endTag = "<div class=\"catering catering1\">";
+                var beginIndex = pageContent.IndexOf(beginTag, StringComparison.Ordinal);
+                var endIndex = pageContent.IndexOf(endTag, beginIndex + 1, StringComparison.Ordinal);
 
                 if (beginIndex >= endIndex)
                 {
-                    return new List<string>();
+                    return null;
                 }
 
-                return pageContent.Substring(beginIndex, endIndex - beginIndex).Split("<p>")
-                    .AsSpan()
-                    .Slice(1)
-                    .ToArray()
-                    .Select(e => e.Replace("</p>", ""));
+                return pageContent.Substring(beginIndex, endIndex - beginIndex);
             }
         }
     }
