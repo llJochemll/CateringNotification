@@ -1,5 +1,6 @@
 ﻿using Xunit;
 using CateringNotification.Content.Campus;
+using System.Threading.Tasks;
 
 namespace CateringNotification.Tests
 {
@@ -9,14 +10,13 @@ namespace CateringNotification.Tests
         [InlineData("https://www.pxl.be/Pub/Studenten/Voorzieningen-Student/Catering/")]
         [InlineData(null)]
         [InlineData("")]
-        public void Campus_GetMenuAsync_ShouldContain18CharactersWhenInputIsInvalid(string url)
+        public async Task Campus_GetMenuAsync_ShouldReturnNullWhenInputIsInvalid(string url)
         {
             //Act
-            var result = Campus.GetMenuAsync(url).Result;
+            var result = await Campus.GetMenuAsync(url);
 
             //Assert
-            Assert.NotNull(result);
-            Assert.Equal(string.Empty, result);
+            Assert.Null(result);
         }
 
         [Fact]
